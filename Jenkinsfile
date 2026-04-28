@@ -4,37 +4,31 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/Mayookha05/Moneymap.git'
+                git branch: 'master', url: 'https://github.com/Mayookha05/Moneymap.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                bat 'pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'python manage.py test'
+                bat 'python manage.py test --verbosity=2'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t moneymap .'
+                bat 'docker build -t moneymap .'
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Deploy') {
             steps {
-                sh 'docker push moneymap:latest'
-            }
-        }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh 'kubectl apply -f kubernetes/deployment.yml'
+                bat 'docker-compose up -d --build'
             }
         }
     }
