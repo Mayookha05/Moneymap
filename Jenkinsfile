@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PYTHON = 'py'
+    }
+
     stages {
         stage('Clone Code') {
             steps {
@@ -10,13 +14,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                bat 'py -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'python manage.py test --verbosity=2'
+                bat 'py manage.py test --verbosity=2'
             }
         }
 
