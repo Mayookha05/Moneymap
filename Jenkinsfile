@@ -1,26 +1,22 @@
 pipeline {
     agent any
 
-    environment {
-        PYTHON = 'py'
-    }
-
     stages {
         stage('Clone Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/Mayookha05/Moneymap.git'
+                git branch: 'main', url: 'https://github.com/Mayookha05/Moneymap.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'py -m pip install -r requirements.txt'
+                bat 'C:\\Users\\retna\\AppData\\Local\\Python\\bin\\python.exe -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'py manage.py test --verbosity=2'
+                bat 'C:\\Users\\retna\\AppData\\Local\\Python\\bin\\python.exe manage.py test --verbosity=2'
             }
         }
 
