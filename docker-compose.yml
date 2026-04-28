@@ -18,4 +18,4 @@ services:
       MYSQL_DATABASE: moneymap
       MYSQL_ROOT_PASSWORD: moneymap123
     ports:
-      - "3306:3306"
+      - "3307:3306"
